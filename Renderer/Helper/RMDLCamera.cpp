@@ -8,7 +8,7 @@
 /*                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#import "RMDLCamera.hpp"
+#include <Utils/hpp/RMDLCamera.hpp>
 
 static simd::float4x4 sInvMatrixLookat(simd::float3 inEye, simd::float3 inTo, simd::float3 inUp)
 {

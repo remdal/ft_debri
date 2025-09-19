@@ -1,3 +1,13 @@
+###############################################################
+#                                         +       +           #
+#      File: Makefile            +++     +++				  #
+#                                         +       +           #
+#       By: Laboitederemdal                +       +          #
+#                                        +           +        #
+#       Created: 19/09/2025 16:48:39      + + + + + +         #
+#                                                             #
+###############################################################
+
 CC			=	clang++
 NAME		=	ft_débri
 SRCS		=	Application Renderer
@@ -10,7 +20,7 @@ HEADERS_HPP	=	$(shell find $(INCLUDES) -name '*.hpp')
 OBJS_DIR	=	Product
 DEPS_DIR	=	$(OBJS_DIR)
 PLIST		=	application/macOS/Info.plist
-FLAGS		=	-std=c++26 -ObjC++ -I./includes -I./metal-cpp -I./metal-cpp-extensions -ferror-limit=150 #-Wall -Wextra -Werror
+FLAGS		=	-std=c++26 -ObjC++ -I./includes -I./Frameworks/metal-cpp -I./Frameworks/metal-cpp-extensions -ferror-limit=150 #-Wall -Wextra -Werror
 LINKERFLAGS	=	-Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker $(PLIST)
 CPP_OBJS	=	$(patsubst $(SRCS)/%.cpp,$(OBJS_DIR)/%.o,$(CPP_FILES))
 C_OBJS		=	$(patsubst $(SRCS)/%.c,$(OBJS_DIR)/%.o,$(C_FILES))
@@ -32,7 +42,7 @@ RESET		=	\033[0m
 CURSIVE     =	\033[33;3m
 GRAY        =	\033[33;2;37m
 
-VPATH=./Frameworks/metal-cpp
+VPATH=./metal-cpp
 FRAMEWORKS	=	Metal MetalKit QuartzCore AppKit Foundation #Cocoa
 LDFLAGS		=	$(addprefix -framework , $(FRAMEWORKS))
 MACOS_SDK	=	$(shell xcrun --sdk macosx --show-sdk-path)
@@ -91,4 +101,3 @@ fclean:	clean
 re:		clean all
 
 .PHONY:	all clean fclean re
-

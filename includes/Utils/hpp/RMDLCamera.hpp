@@ -13,7 +13,7 @@
 
 # include <simd/simd.h>
 
-# import <Renderer/Shared/RMDLMainRenderer_shared.h>
+# import <Shared/RMDLMainRenderer_shared.h>
 
 class RMDLCamera
 {
@@ -21,8 +21,8 @@ public:
     RMDLCamera();
     ~RMDLCamera();
 
-    RMDLCamera&            initPerspectiveWithPosition(simd::float3 position, simd::float3 direction, simd::float3 up, float viewAngle, float aspectRatio, float nearPlane, float farPlane);
-    RMDLCamera&            initParallelWithPosition(simd::float3 position, simd::float3 direction, simd::float3 up, float width, float height, float nearPlane, float farPlane);
+    RMDLCamera&     initPerspectiveWithPosition(simd::float3 position, simd::float3 direction, simd::float3 up, float viewAngle, float aspectRatio, float nearPlane, float farPlane);
+    RMDLCamera&     initParallelWithPosition(simd::float3 position, simd::float3 direction, simd::float3 up, float width, float height, float nearPlane, float farPlane);
     RMDLCameraUniforms  uniforms();
     void            updateUniforms();
     bool            isPerspective() const;

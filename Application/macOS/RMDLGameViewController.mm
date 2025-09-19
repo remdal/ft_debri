@@ -1,6 +1,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                        +       +          */
-/*      File: RMDLGameViewController.mm            +++     +++	**/
+/*      File: RMDLGameViewController.mm         +++     +++	**/
 /*                                        +       +          */
 /*      By: Laboitederemdal      **        +       +        **/
 /*                                       +           +       */
@@ -8,3 +8,22 @@
 /*                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+#include "RMDLGameViewController.h"
+
+RMDLMTKViewDelegate::RMDLMTKViewDelegate( MTL::Device* pDevice )
+: MTK::ViewDelegate()
+, _pRenderer( new RMDLMainRenderer( pDevice ) )
+{
+    std::cout << "RMDLMTKViewDelegate constuctor" << std::endl;
+}
+
+RMDLMTKViewDelegate::~RMDLMTKViewDelegate()
+{
+    std::cout << "RMDLMTKViewDelegate destuctor" << std::endl;
+    delete _pRenderer;
+}
+
+void RMDLMTKViewDelegate::drawInMTKView( MTK::View* pView )
+{
+    _pRenderer->draw( pView );
+}

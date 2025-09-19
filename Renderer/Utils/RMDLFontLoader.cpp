@@ -1,21 +1,10 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                        +       +          */
-/*      File: RMDLGameViewController.h          +++     +++	**/
+/*      File: RMDLFontLoader.cpp            +++     +++	    **/
 /*                                        +       +          */
 /*      By: Laboitederemdal      **        +       +        **/
 /*                                       +           +       */
-/*      Created: 19/09/2025 13:08:30      + + + + + +   * ****/
+/*      Created: 09/09/2025 17:40:50      + + + + + +   * ****/
 /*                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include "RMDLMainRenderer.h"
-class   RMDLMTKViewDelegate : public MTK::ViewDelegate {
-public:
-    RMDLMTKViewDelegate( MTL::Device* pDevice );
-    virtual ~RMDLMTKViewDelegate() override;
-    
-    virtual void drawInMTKView( MTK::View* pView ) override;
-
-private:
-    RMDLMainRenderer*                   _pRenderer;
-};

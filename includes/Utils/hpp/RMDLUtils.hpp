@@ -1,21 +1,22 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /*                                        +       +          */
-/*      File: RMDLGameViewController.h          +++     +++	**/
+/*      File: RMDLUtils.hpp            +++     +++			**/
 /*                                        +       +          */
 /*      By: Laboitederemdal      **        +       +        **/
 /*                                       +           +       */
-/*      Created: 19/09/2025 13:08:30      + + + + + +   * ****/
+/*      Created: 09/09/2025 14:50:41      + + + + + +   * ****/
 /*                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include "RMDLMainRenderer.h"
-class   RMDLMTKViewDelegate : public MTK::ViewDelegate {
-public:
-    RMDLMTKViewDelegate( MTL::Device* pDevice );
-    virtual ~RMDLMTKViewDelegate() override;
-    
-    virtual void drawInMTKView( MTK::View* pView ) override;
+#ifndef RMDLUTILS_HPP
+# define RMDLUTILS_HPP
 
-private:
-    RMDLMainRenderer*                   _pRenderer;
-};
+# include <chrono>
+# include <time.h>
+# include <iostream>
+# include <sys/sysctl.h>
+# include <stdlib.h>
+
+void *ft_memcpy(void *dst, const void *src, size_t n);
+
+#endif /* RMDLUTILS_HPP */
