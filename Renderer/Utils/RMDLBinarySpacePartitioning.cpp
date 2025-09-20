@@ -8,7 +8,7 @@
 /*                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <Utils/RMDLBinarySpacePartitioning.hpp>
+#include <Utils/hpp/RMDLBinarySpacePartitioning.hpp>
 
 Fixed::Fixed() : _fixedPointValue(0)
 {

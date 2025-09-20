@@ -25,6 +25,7 @@ public:
 
 private:
     NS::Window*             _pWindow;
+    NS::Object*             _pSlider;
     MTK::View*              _pMtkView;
     MTL::Device*            _pDevice;
     RMDLMTKViewDelegate*    _pViewDelegate = nullptr;

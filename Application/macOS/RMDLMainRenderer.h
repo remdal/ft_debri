@@ -25,6 +25,7 @@
 # include <thread>
 
 # include <Utils/hpp/RMDLCamera.hpp>
+# import <Shared/RMDLMainRenderer_shared.h>
 
 class RMDLMainRenderer
 {
@@ -33,6 +34,7 @@ public:
     ~RMDLMainRenderer();
 
     void draw( MTK::View* pView );
+    void UpdateCpuUniforms();
 private:
     MTK::View                   *_pMtkViewTwo;
     MTL::Device*                _pDevice;
@@ -42,11 +44,20 @@ private:
     dispatch_semaphore_t        _semaphore;
     static const int            kMaxFramesInFlight;
     uint                        _animationIndex;
-    RMDLCamera*                 camera;
-    simd::float2                position;
-    float                       brushsize;
-    simd::float2                cursorPosition;
-    NSUInteger                  mouseButtonMask;
+    RMDLCamera*                 _camera;
+    simd::float2                _position;
+    float                       _brushSize;
+    simd::float2                _cursorPosition;
+    NSUInteger                  _mouseButtonMask;
+    //NS::Date                    _startTime;
+    //auto start = std::chrono::system_clock::now();
+    dispatch_semaphore_t        _inFlightSemaphore;
+    RMDLUniforms                _uniforms_cpu;
+    MTL::Texture*               _shadowMap;
+    MTL::Texture*               _perlinMap;
+    NSUInteger                  _onFrame; // to count frames, and using frame-based times
+    MTL::Texture*               _gBuffer0;
+    MTL::Texture*               _gBuffer1;
 };
 
 #endif /* RMDLMAINRENDERER_H */

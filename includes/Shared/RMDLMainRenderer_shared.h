@@ -32,7 +32,7 @@ struct RMDLUniforms
     RMDLCameraUniforms  cameraUniforms;
     RMDLCameraUniforms  shadowCameraUniforms[3];
 
-    // Mouse state: x,y = position in pixels; z = buttons
+    // Mouse state: x, y = position in pixels; z = buttons
     simd::float3        mouseState;
     simd::float2        invScreenSize;
     float               projectionYScale;

@@ -8,7 +8,8 @@
 #                                                             #
 ###############################################################
 
-CC			=	clang++
+CXX			=	clang++
+CC			=	clang
 NAME		=	ft_débri
 SRCS		=	Application Renderer
 INCLUDES	=	includes
@@ -17,11 +18,13 @@ C_FILES		=	$(shell find $(SRCS) -name '*.c')
 MM_FILES	=	$(shell find $(SRCS) -name '*.mm')
 HEADERS_H	=	$(shell find $(INCLUDES) -name '*.h')
 HEADERS_HPP	=	$(shell find $(INCLUDES) -name '*.hpp')
+CFLAGS		=	-I./includes -Wall -Wextra -Werror
 OBJS_DIR	=	Product
 DEPS_DIR	=	$(OBJS_DIR)
 PLIST		=	application/macOS/Info.plist
 FLAGS		=	-std=c++26 -ObjC++ -I./includes -I./Frameworks/metal-cpp -I./Frameworks/metal-cpp-extensions -ferror-limit=150 #-Wall -Wextra -Werror
 LINKERFLAGS	=	-Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker $(PLIST)
+
 CPP_OBJS	=	$(patsubst $(SRCS)/%.cpp,$(OBJS_DIR)/%.o,$(CPP_FILES))
 C_OBJS		=	$(patsubst $(SRCS)/%.c,$(OBJS_DIR)/%.o,$(C_FILES))
 MM_OBJS		=	$(patsubst $(SRCS)/%.mm,$(OBJS_DIR)/%.o,$(MM_FILES))
@@ -43,35 +46,40 @@ CURSIVE     =	\033[33;3m
 GRAY        =	\033[33;2;37m
 
 VPATH=./metal-cpp
+vpath %.cpp $(SRCS)
+vpath %.c $(SRCS)
+vpath %.mm $(SRCS)
+
 FRAMEWORKS	=	Metal MetalKit QuartzCore AppKit Foundation #Cocoa
 LDFLAGS		=	$(addprefix -framework , $(FRAMEWORKS))
 MACOS_SDK	=	$(shell xcrun --sdk macosx --show-sdk-path)
 CXXFLAGS	+=	-isysroot $(MACOS_SDK)
+CFLAGS		+=	-isysroot $(MACOS_SDK)
 
-$(OBJDIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS_H)
+$(OBJS_DIR)/%.o: %.c
 	@ echo "\t$(_YELLOW) compiling... $*.c$(RESET)"
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) -c $< -o $@
-
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(HEADERS_HPP)
-	@ echo "\t$(_YELLOW) compiling... $*.cpp$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_DIR)/%.o: %.cpp
+	@ echo "\t$(_YELLOW) compiling... $*.cpp$(RESET)"
+	@$(CC) $(FLAGS) -c $< -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.mm $(HEADERS_H)
 	@ echo "\t$(_YELLOW) compiling... $*.mm$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
 $(DEPS_DIR)/%.d: $(SRCS_DIR)/%.cpp | $(DEPS_DIR)
 	@ echo "\t$(_YELLOW) compiling... cpp $*.d$(RESET)"
-	@$(CC) $(CFLAGS) -MM $< -MT $(@:.d=.o) -MF $@
+	@$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
 
 $(DEPS_DIR)/%.d: $(SRCS_DIR)/%.c | $(DEPS_DIR)
 	@ echo "\t$(_YELLOW) compiling... $*.d$(RESET)"
-	@$(CC) $(CFLAGS) -MM $< -MT $(@:.d=.o) -MF $@
+	@$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
 
 $(DEPS_DIR)/%.d: $(SRCS_DIR)/%.mm | $(DEPS_DIR)
 	@ echo "\t$(_YELLOW) compiling... $*.d$(RESET)"
-	@$(CC) $(CFLAGS) -MM $< -MT $(@:.d=.o) -MF $@
+	@$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
 
 all: init	$(NAME)
 
@@ -86,18 +94,18 @@ init:
 $(NAME):	$(C_OBJS) $(CPP_OBJS) $(MM_OBJS)
 	@echo "\t$(CYAN)[Creating program]$(RESET)"
 	@echo "\t$(YELLOW) compiling$(_YELLOW)... $(RESET)$(YELLOW)$*.c++$*.cpp$*.mm$(RESET)"
-	$(CC) $(FLAGS) $(C_OBJS) $(CPP_OBJS) $(MM_OBJS) -o $(NAME) $(LDFLAGS) $(LINKERFLAGS)
+	$(CXX) $(FLAGS) $(C_OBJS) $(CPP_OBJS) $(MM_OBJS) -o $(NAME) $(LDFLAGS) $(LINKERFLAGS)
 	@echo "$(CURSIVE)[Executable created & ready]$(RESET)\n\033[32mCompiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ"
 	@echo "$(_GREEN)object files were in test$(RESET)"
 
 clean:
 	@echo "$(GRAY)[cleaning up .out & objects files]$(RESET)"
-	@rm -rf $(DEP_FILES) $(OBJS_DIR)
+	@rm -rf $(OBJS_DIR)
 
 fclean:	clean
 	@printf "$(RED)[cleaning up .out, objects & library files]$(_NC)\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
-	@rm -rf $(NAME)
+	@rm -f $(NAME)
 
-re:		clean all
+re:		fclean all
 
 .PHONY:	all clean fclean re
