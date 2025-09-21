@@ -26,6 +26,7 @@
 
 # include <Utils/hpp/RMDLCamera.hpp>
 # import <Shared/RMDLMainRenderer_shared.h>
+# import <Utils/hpp/RMDLMesh.hpp>
 
 class RMDLMainRenderer
 {
@@ -58,6 +59,9 @@ private:
     NSUInteger                  _onFrame; // to count frames, and using frame-based times
     MTL::Texture*               _gBuffer0;
     MTL::Texture*               _gBuffer1;
+    MTL::RenderPipelineState*   m_pSkyboxPipelineState;
+    MTL::Texture*               m_pSkybox;
+    Mesh                        m_skyboxMesh;
 };
 
 #endif /* RMDLMAINRENDERER_H */

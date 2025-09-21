@@ -27,3 +27,13 @@ void RMDLMTKViewDelegate::drawInMTKView( MTK::View* pView )
 {
     _pRenderer->draw( pView );
 }
+
+bool RMDLMTKViewDelegate::acceptsFirstResponder()
+{
+    return (true);
+}
+
+bool RMDLMTKViewDelegate::acceptsFirstMouse( MTL::Event* event )
+{
+    return (true);
+}

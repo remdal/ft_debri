@@ -8,9 +8,12 @@
 /*                                                           */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include "RMDLMainRenderer.h"
+#ifndef RMDLGAMEVIEWCONTROLLER_H
+# define RMDLGAMEVIEWCONTROLLER_H
 
-#include <cstdint>
+# include "RMDLMainRenderer.h"
+
+# include <cstdint>
 
 // The enum value is the NSEvent key code
 enum class Controls : uint8_t
@@ -47,7 +50,11 @@ public:
     virtual ~RMDLMTKViewDelegate() override;
     
     virtual void drawInMTKView( MTK::View* pView ) override;
+    bool acceptsFirstResponder();
+    bool acceptsFirstMouse( MTL::Event* event );
 
 private:
-    RMDLMainRenderer*                   _pRenderer;
+    RMDLMainRenderer*   _pRenderer;
 };
+
+#endif /* RMDLGAMEVIEWCONTROLLER_H */

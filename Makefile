@@ -22,7 +22,7 @@ CFLAGS		=	-I./includes -Wall -Wextra -Werror
 OBJS_DIR	=	Product
 DEPS_DIR	=	$(OBJS_DIR)
 PLIST		=	application/macOS/Info.plist
-FLAGS		=	-std=c++26 -ObjC++ -I./includes -I./Frameworks/metal-cpp -I./Frameworks/metal-cpp-extensions -ferror-limit=150 #-Wall -Wextra -Werror
+FLAGS		=	-std=c++26 -ObjC++ -I./includes -I./Frameworks/metal-cpp -I./Frameworks/metal-cpp-extensions -ferror-limit=10 #-Wall -Wextra -Werror
 LINKERFLAGS	=	-Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker $(PLIST)
 
 CPP_OBJS	=	$(patsubst $(SRCS)/%.cpp,$(OBJS_DIR)/%.o,$(CPP_FILES))
@@ -59,27 +59,27 @@ CFLAGS		+=	-isysroot $(MACOS_SDK)
 $(OBJS_DIR)/%.o: %.c
 	@ echo "\t$(_YELLOW) compiling... $*.c$(RESET)"
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR)/%.o: %.cpp
 	@ echo "\t$(_YELLOW) compiling... $*.cpp$(RESET)"
-	@$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.mm $(HEADERS_H)
 	@ echo "\t$(_YELLOW) compiling... $*.mm$(RESET)"
-	@$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 $(DEPS_DIR)/%.d: $(SRCS_DIR)/%.cpp | $(DEPS_DIR)
 	@ echo "\t$(_YELLOW) compiling... cpp $*.d$(RESET)"
-	@$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
+	$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
 
 $(DEPS_DIR)/%.d: $(SRCS_DIR)/%.c | $(DEPS_DIR)
 	@ echo "\t$(_YELLOW) compiling... $*.d$(RESET)"
-	@$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
+	$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
 
 $(DEPS_DIR)/%.d: $(SRCS_DIR)/%.mm | $(DEPS_DIR)
 	@ echo "\t$(_YELLOW) compiling... $*.d$(RESET)"
-	@$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
+	$(CC) $(FLAGS) -MM $< -MT $(@:.d=.o) -MF $@
 
 all: init	$(NAME)
 
@@ -100,11 +100,11 @@ $(NAME):	$(C_OBJS) $(CPP_OBJS) $(MM_OBJS)
 
 clean:
 	@echo "$(GRAY)[cleaning up .out & objects files]$(RESET)"
-	@rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR)
 
 fclean:	clean
 	@printf "$(RED)[cleaning up .out, objects & library files]$(_NC)\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re:		fclean all
 

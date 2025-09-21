@@ -14,24 +14,24 @@
 #include <Foundation/Foundation.hpp>
 #include <QuartzCore/QuartzCore.hpp>
 #include <Metal/Metal.hpp>
-#include <MetalFX/MetalFX.hpp>
+//#include <MetalFX/MetalFX.hpp>
+#include <MetalKit/MetalKit.hpp>
+#include "Utils/NonCopyable.h"
 
 #include <string>
 #include <unordered_map>
+#include <memory>
 
-class GameCoordinator : public NonCopyable
+class RMDLGameCoordinator : public NonCopyable
 {
 public:
-    GameCoordinator(MTL::Device* pDevice,
-                    NS::UInteger width,
-                    NS::UInteger height,
-                    const std::string& assetSearchPath);
-    ~GameCoordinator();
+    RMDLGameCoordinator( MTL::Device* pDevice, NS::UInteger width, NS::UInteger height, const std::string& assetSearchPath );
+    ~RMDLGameCoordinator();
 
     void resizeDrawable(float width, float height);
     void draw( CA::MetalDrawable* pDrawable );
-    void loadGameTextures(const std::string& textureSearchPath);
-    void loadGameSounds(const std::string& assetSearchPath);
+    void loadGameTextures( const std::string& textureSearchPath );
+    void loadGameSounds( const std::string& assetSearchPath );
 
     enum class HighScoreSource {
         Local
@@ -39,7 +39,9 @@ public:
 
     int highScore() const;
 private:
-    std::unordered_map<std::string, NS::SharedPtr<MTL::Texture>>    _textureAssets;
+    //std::unordered_map<std::string, NS::SharedPtr<MTL::Texture>>    _textureAssets;
     int                                                             frame;
     int                                                             _highScore;
 };
+
+#endif

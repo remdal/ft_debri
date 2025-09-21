@@ -70,9 +70,9 @@ struct RMDLObjVertex
     simd::float3        color;
     bool operator == (const RMDLObjVertex& o) const
     {
-        return simd::all (o.position == position) &&
+        return (simd::all (o.position == position) &&
         simd::all (o.normal == normal) &&
-        simd::all (o.color == color);
+        simd::all (o.color == color));
     }
 };
 
