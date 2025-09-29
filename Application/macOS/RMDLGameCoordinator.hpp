@@ -16,7 +16,7 @@
 #include <Metal/Metal.hpp>
 //#include <MetalFX/MetalFX.hpp>
 #include <MetalKit/MetalKit.hpp>
-#include "Utils/NonCopyable.h"
+#include <Utils/NonCopyable.h>
 
 #include <string>
 #include <unordered_map>

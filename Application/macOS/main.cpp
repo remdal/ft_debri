@@ -16,8 +16,10 @@
 
 #include "RMDLAppDelegate.h"
 
+#include <stdio.h>
+
 int main ( int argc, char* argv[] )
-{
+{;
     unsigned int numThreads = std::thread::hardware_concurrency();
     std::cout << "number of Threads = std::thread::hardware_concurrency : " << numThreads << std::endl;
     NS::AutoreleasePool* pAutoreleasePool = NS::AutoreleasePool::alloc()->init();
@@ -26,8 +28,5 @@ int main ( int argc, char* argv[] )
     pSharedApplication->setDelegate( &del );
     pSharedApplication->run();
     pAutoreleasePool->release();
-    @autoreleasepool
-    {
-    }
     return (0);
 }

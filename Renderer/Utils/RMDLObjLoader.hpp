@@ -58,7 +58,7 @@ public:
 
     RMDLObjLoader& initWithDevice( MTL::Device* device );
 
-    RMDLObjMesh*    loadFromURL(NS::URL *inURL);
+    RMDLObjMesh*    loadFromURL( NS::URL *inURL );
 private:
     std::vector<simd::float3>                   _positions;
     std::vector<simd::float3>                   _normals;

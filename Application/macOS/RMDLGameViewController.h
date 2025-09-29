@@ -14,7 +14,7 @@
 # include "RMDLMainRenderer.h"
 
 # include <cstdint>
-
+/*
 // The enum value is the NSEvent key code
 enum class Controls : uint8_t
 {
@@ -42,7 +42,7 @@ enum class Controls : uint8_t
     controlsFast        = 0x80, // + vite
     controlsSlow        = 0x81,  // - vite
     inventory           = 0x0f  // R
-};
+};*/
 class   RMDLMTKViewDelegate : public MTK::ViewDelegate
 {
 public:
@@ -56,5 +56,49 @@ public:
 private:
     RMDLMainRenderer*   _pRenderer;
 };
+
+/*#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
+// For CFIndex, CFTypeRef
+#include <CoreFoundation/CFBase.h>
+#include <unordered_map>
+
+#include <simd/simd.h>
+
+namespace MTL
+{
+    class RenderCommandEncoder;
+}
+
+class GameController : public NonCopyable
+{
+public:
+    GameController();
+    ~GameController();
+
+    bool isLeftArrowDown() const;
+    bool isRightArrowDown() const;
+    bool isXMacDown() const;
+    bool isSpacebarDown() const;
+
+    float leftThumbstickX() const;
+    float rightThumbstickX() const;
+    bool isButtonADown() const;
+    bool isButtonBDown() const;
+    bool isButtonXDown() const;
+    bool isButtonYDown() const;
+
+    void setHapticIntensity(float intensity) const;
+    
+    void  renderOverlay(MTL::RenderCommandEncoder* pEnc);
+    
+    simd::float3 accelerometerData() const;
+private:
+    CFTypeRef                         _haptics;
+    CFTypeRef                         _motionManager;
+};
+
+#endif // CONTROLLER_H */
 
 #endif /* RMDLGAMEVIEWCONTROLLER_H */
