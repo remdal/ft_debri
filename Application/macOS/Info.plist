@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>fr</string>
 	<key>CFBundleIconFile</key>
-	<string>claude.png</string>
+	<string>Data/claude.png</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
 	<key>MetalCaptureEnabled</key>

@@ -1,7 +1,3 @@
-#import <Foundation/Foundation.hpp>
-#import <CoreMotion/CoreMotion.h>
-#import <GameController/GameController.h>
-
 #include "RMDLController.h"
 
 typedef NS_OPTIONS(uint8_t, Controls)
@@ -183,7 +179,7 @@ void GameController::setHapticIntensity(float intensity) const
     }
 }
 
-void GameController::renderOverlay(MTL::RenderCommandEncoder* pEnc)
+void GameController::renderOverlay( MTL::RenderCommandEncoder* pEnc )
 {
     // Here you can customize how your touch (virtual) game controller looks
     // by directly issuing Metal commands and render it onscreen.

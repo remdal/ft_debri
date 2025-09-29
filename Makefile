@@ -23,7 +23,7 @@ CFLAGS		=	-I./includes -Wall -Wextra -Werror
 OBJS_DIR	=	Product
 DEPS_DIR	=	$(OBJS_DIR)
 PLIST		=	application/macOS/Info.plist
-FLAGS		=	-std=c++20 -ObjC++ -I./includes -I./Frameworks/metal-cpp -I./Frameworks/metal-cpp-extensions -ferror-limit=10 -fobjc-weak #-Wall -Wextra -Werror -fobjc-arc
+FLAGS		=	-std=c++20 -ObjC++ -I./includes -I./Frameworks/metal-cpp -I./Frameworks/metal-cpp-extensions -ferror-limit=10 -fobjc-weak -Warc-bridge-casts-disallowed-in-nonarc #-Wall -Wextra -Werror -fobjc-arc
 LINKERFLAGS	=	-Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker $(PLIST)
 
 CPP_OBJS	=	$(patsubst $(SRCS)/%.cpp,$(OBJS_DIR)/%.o,$(CPP_FILES))
@@ -54,7 +54,7 @@ vpath %.c $(SRCS)
 vpath %.mm $(SRCS)
 vpath %.m $(SRCS)
 
-FRAMEWORKS	=	Metal MetalKit QuartzCore AppKit Foundation GameController Cocoa CoreHaptics CoreMotion
+FRAMEWORKS	=	Metal MetalKit QuartzCore AppKit Foundation GameController Cocoa CoreHaptics CoreMotion PHASE AVFAudio MetalFX CoreText CoreGraphics
 LDFLAGS		=	$(addprefix -framework , $(FRAMEWORKS))
 MACOS_SDK	=	$(shell xcrun --sdk macosx --show-sdk-path)
 CXXFLAGS	+=	-isysroot $(MACOS_SDK)
