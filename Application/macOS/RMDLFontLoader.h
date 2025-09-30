@@ -1,10 +1,6 @@
 #ifndef RMDLFONTLOADER_H
 #define RMDLFONTLOADER_H
 
-#import <MetalKit/MetalKit.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <CoreText/CoreText.h>
-
 #include <Foundation/Foundation.hpp>
 #include <Metal/Metal.hpp>
 

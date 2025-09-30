@@ -18,5 +18,6 @@
 # include <stdlib.h>
 
 void *ft_memcpy(void *dst, const void *src, size_t n);
+void *ft_memset(void *s, int c, size_t n);
 
 #endif /* RMDLUTILS_HPP */
